@@ -1,14 +1,14 @@
 import axios from "axios";
-import {SET_CURRENT_USER, GET_ERRORS} from "./types"
+import {SET_CURRENT_USER, GET_ERRORS} from "../types"
 
 export const loginUser = userData => dispatch => {
   axios.defaults.xsrfCookieName = "CSRF-TOKEN";
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
-  axios
+  return axios
     .post('http://localhost:3001/api/session', userData)
     .then(res => {
-      dispatch({
+      return dispatch({
         type: SET_CURRENT_USER,
         payload: res.data
       });

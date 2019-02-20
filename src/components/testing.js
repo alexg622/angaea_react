@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/auth';
+import { loginUser } from '../actions/session/auth';
 
 class Testing extends Component {
   componentDidMount() {
