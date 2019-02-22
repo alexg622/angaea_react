@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../styles/session/login.scss'
 import {loginUser} from '../../actions/session/auth'
-import  { Redirect } from 'react-router-dom'
 
 class Login extends Component{
   constructor() {
@@ -33,7 +32,7 @@ class Login extends Component{
         return
       } else {
         console.log("hers");
-        return this.props.history.push("/users" + Object.keys(this.props.auth.user)[0])
+        return this.props.history.push("/users" + String(this.props.currentUser.id))
       }
     })
   }
@@ -44,8 +43,8 @@ class Login extends Component{
       <div className="login-container-better">
           <h1>Log Into My Portfolio</h1>
           <form className="login-form" onSubmit={this.onSubmit}>
-            <input className="login-inputs" type="email" name="email" onChange={this.onChange} placeholder="EMAIL" value={this.state.email}/>
-            <input className="login-inputs" type="password" name="password" onChange={this.onChange} placeholder="PASSWORD" value={this.state.password}/>
+            <input className="login-inputs" autoComplete="email" type="email" name="email" onChange={this.onChange} placeholder="EMAIL" value={this.state.email}/>
+            <input className="login-inputs" autoComplete="current-password" type="password" name="password" onChange={this.onChange} placeholder="PASSWORD" value={this.state.password}/>
 
             <div width="100px">
               <input className="best-btn" type="submit" value="Log in"/>
@@ -65,11 +64,13 @@ class Login extends Component{
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
   errors: state.errors,
+  currentUser: state.auth.currentUser || {},
   auth: state.auth
 })
 

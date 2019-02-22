@@ -1,7 +1,8 @@
-import { SET_CURRENT_USER } from '../actions/types';
+import { SET_CURRENT_USER, CLEAR_CURRENT_USER} from '../actions/types';
 
 const initialState = {
-  user: {}
+  currentUser: {},
+  isAuthenticated: false
 }
 
 export default function(state = initialState, action) {
@@ -9,7 +10,14 @@ export default function(state = initialState, action) {
       case SET_CURRENT_USER:
         return {
           ...state,
-          user: action.payload
+          currentUser: action.payload.currentUser,
+          isAuthenticated: true
+        }
+      case CLEAR_CURRENT_USER:
+        return {
+          ...state,
+          currentUser: {},
+          isAuthenticated: false
         }
     default:
       return state;
