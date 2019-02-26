@@ -15,14 +15,12 @@ class Index extends Component {
     let result = []
     const { categories } = this.props.categories
     window.categories = categories
-    console.log(categories);
     for(let i=0; i<categories.length; i++) {
       let category = categories[i]
       if(category.activities.length > 0) {
-        result.push(<CategoryCarousel key={i} category={category}/>)
+        result.push(<CategoryCarousel key={String(i)} currentUser={this.props.currentUser} category={category}/>)
       }
     }
-    console.log(result);
     return result
   }
 
@@ -30,7 +28,6 @@ class Index extends Component {
     window.props = this.props
     return (
       <div>
-        Hi
         {this.showCategories()}
       </div>
 
