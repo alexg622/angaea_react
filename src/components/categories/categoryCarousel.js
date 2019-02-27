@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import ActivityCard from './activityCard.js'
 import "../../styles/categories/carousel.scss"
 
 class CategoryCarousel extends Component {
-  constructor() {
-    super()
-  }
   showActivityCard() {
     const {activities} = this.props.category
     let result = []
-    console.log(activities);
     let counter = 0
     if(activities) {
       activities.forEach(activity => {

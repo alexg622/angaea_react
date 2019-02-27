@@ -6,7 +6,7 @@ class ActivityCard extends Component {
     const {activity} = this.props
     let url = "/activities/" + String(activity.id)
     if(activity.imageAttached) {
-      return <a className="manage-height" href={url}><img className="second-home-image" src={activity.image}/></a>
+      return <a className="manage-height" href={url}><img alt="" className="second-home-image" src={activity.image}/></a>
     }
   }
 
