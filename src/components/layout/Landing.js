@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "../../styles/layout/landing.scss"
+import { Link } from 'react-router-dom';
 
 class Landing extends Component {
   render() {
@@ -16,7 +17,7 @@ class Landing extends Component {
             in the best way possible, by letting your passion
             choose you.
           </div>
-          <a className="best-btn widen" href="/login">Login/Create my Portfolio</a>
+          <Link className="best-btn widen" to="/login">Login/Create my Portfolio</Link>
         </div>
 
         <div className="landing-second-container">

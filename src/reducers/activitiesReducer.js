@@ -8,6 +8,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch(action.type) {
     case GET_ACTIVITY:
+      console.log("in reducer activity");
       return {
         ...state,
         activity: action.payload
