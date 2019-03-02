@@ -4,6 +4,19 @@ import { getActivity } from '../../actions/activities/activityActions'
 import ResizeImage from './resizeImage'
 import { connect } from 'react-redux';
 import "../../styles/activities/show.scss"
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  GooglePlusShareButton,
+  GooglePlusIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  PinterestShareButton,
+  PinterestIcon
+} from 'react-share';
+
 class Show extends Component {
   constructor(props) {
     super(props)
@@ -46,7 +59,6 @@ class Show extends Component {
  }
 
  gravatarSize () {
-    console.log("here");
     let gravatars = document.querySelectorAll(".gravatar")
     if (gravatars.length > 0) {
       for(let i=0; i<gravatars.length; i++) {
@@ -141,7 +153,44 @@ class Show extends Component {
             <div className="second-activities-show-about-text">{activity.content}</div>
           </div>
           <div className='social-share-buttons'>
-            social share
+            <FacebookShareButton
+            url={window.location.href}
+            quote={"Angaea"}
+            className="Demo__some-network__share-button">
+            <FacebookIcon
+              size={32}
+              round />
+            </FacebookShareButton>
+            <div style={{"marginTop": "10px"}}>
+              <TwitterShareButton
+              url={window.location.href}
+              quote={"Angaea"}
+              className="Demo__some-network__share-button">
+              <TwitterIcon
+                size={32}
+                round />
+              </TwitterShareButton>
+            </div>
+            <div style={{"marginTop": "10px"}}>
+              <GooglePlusShareButton
+              url={window.location.href}
+              quote={"Angaea"}
+              className="Demo__some-network__share-button">
+              <GooglePlusIcon
+                size={32}
+                round />
+              </GooglePlusShareButton>
+            </div>
+            <div style={{"marginTop": "10px"}}>
+              <LinkedinShareButton
+              url={window.location.href}
+              quote={"Angaea"}
+              className="Demo__some-network__share-button">
+              <LinkedinIcon
+                size={32}
+                round />
+              </LinkedinShareButton>
+            </div>
           </div>
         </div>
       )
@@ -164,7 +213,6 @@ class Show extends Component {
   }
 
   showAttendees(activity) {
-    console.log(activity);
     if(activity) {
       if(activity.attendees.length > 0) {
         return(
@@ -179,6 +227,17 @@ class Show extends Component {
     }
   }
 
+  showSpots(activity) {
+    if(activity) {
+      let elements = [<div className="space-holder"></div>, <a href={theHref}><div className="second-activity-ticket">Book</div></a>, <div className="second-show-activity-capacity">{parseInt(activity.capacity) - activity.attendees.length} Spots Left</div>]
+      let theHref = "/activities/" + String(activity.id) + "/activity_tickets/new"
+      return (
+        <div className="second-show-activities-spots-container">
+          {parseInt(activity.capacity)-activity.attendees.length <= 0 ? <div className="second-activity-ticket"> No Spots Left </div> : elements}
+        </div>
+      )
+    }
+  }
 
 
   render() {
@@ -190,6 +249,7 @@ class Show extends Component {
         <div className="google-maps-container">
           <div id="map" className="map"></div>
         </div>
+        {this.showSpots(activity)}
         {this.showAttendees(activity)}
       </div>
     )
