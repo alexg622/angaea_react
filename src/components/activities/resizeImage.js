@@ -10,9 +10,9 @@ class ResizeImage extends Component {
     const {activity} = this.props
     if(activity.imagesAttached) {
       return (
-        <div onclick="" className="second-arrows-holder">
-          <div onclick="" unselectable="on" className="second-left-arrow"> Left </div>
-          <div onclick="" unselectable="on" className="second-right-arrow"> Right </div>
+        <div className="second-arrows-holder">
+          <div unselectable="on" className="second-left-arrow"> Left </div>
+          <div unselectable="on" className="second-right-arrow"> Right </div>
         </div>
       )
     }

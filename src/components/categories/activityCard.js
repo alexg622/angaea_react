@@ -14,7 +14,7 @@ class ActivityCard extends Component {
   showEdit() {
     const {currentUser, activity} = this.props
     if(currentUser && currentUser.id === activity.user.id) {
-      return <Link className="activity-edit-link" to="<%=edit_activity_path(activity)%>">edit</Link>
+      return <Link className="activity-edit-link" to="/">edit</Link>
     }
   }
 

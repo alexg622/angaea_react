@@ -140,11 +140,29 @@ class Show extends Component {
     }
   }
 
+  showImageArrows(activity) {
+    if (activity) {
+      if(activity.imagesAttached) {
+        return (
+          <div className="second-arrows-holder">
+            <div unselectable="on" className="second-left-arrow">L</div>
+            <div unselectable="on" className="second-right-arrow">R</div>
+          </div>
+        )
+      }
+    }
+  }
+
   showOuterContainer (activity) {
     if(activity) {
       return(
         <div className="second-show-activities-mid-container">
-          <div className="second-show-activities-mid-right-container"><img className="activity-show-img" onClick={(e) => this.resizeImage(e)} alt="" height="400px" width="400px" src={activity.imageUrl}></img></div>
+          <div className="second-show-activities-mid-right-container">
+            <div className="second-image-activity-card-container">
+              {this.showImageArrows(activity)}
+              <img className="activity-show-img" onClick={(e) => this.resizeImage(e)} alt="" height="400px" width="400px" src={activity.imageUrl}></img>
+            </div>
+          </div>
           <div className="second-show-activities-mid-left-container">
             <div className="second-show-activities-header">{activity.activity_name}</div>
             <div className="second-activities-show-by"><div className="boldy-by">By:</div> <a className="make-me-pretty" href="">{activity.user.name}</a></div>
@@ -152,40 +170,40 @@ class Show extends Component {
             <div className="second-activities-show-about">ABOUT:</div>
             <div className="second-activities-show-about-text">{activity.content}</div>
           </div>
-          <div className='social-share-buttons'>
+          <div style={{"cursor": "pointer"}} className='social-share-buttons'>
             <FacebookShareButton
             url={window.location.href}
             quote={"Angaea"}
-            className="Demo__some-network__share-button">
+            className="">
             <FacebookIcon
               size={32}
               round />
             </FacebookShareButton>
-            <div style={{"marginTop": "10px"}}>
+            <div style={{"marginTop": "10px", "cursor": "pointer"}}>
               <TwitterShareButton
               url={window.location.href}
               quote={"Angaea"}
-              className="Demo__some-network__share-button">
+              className="">
               <TwitterIcon
                 size={32}
                 round />
               </TwitterShareButton>
             </div>
-            <div style={{"marginTop": "10px"}}>
+            <div style={{"marginTop": "10px", "cursor": "pointer"}}>
               <GooglePlusShareButton
               url={window.location.href}
               quote={"Angaea"}
-              className="Demo__some-network__share-button">
+              className="">
               <GooglePlusIcon
                 size={32}
                 round />
               </GooglePlusShareButton>
             </div>
-            <div style={{"marginTop": "10px"}}>
+            <div style={{"marginTop": "10px", "cursor": "pointer"}}>
               <LinkedinShareButton
               url={window.location.href}
               quote={"Angaea"}
-              className="Demo__some-network__share-button">
+              className="">
               <LinkedinIcon
                 size={32}
                 round />
@@ -229,7 +247,7 @@ class Show extends Component {
 
   showSpots(activity) {
     if(activity) {
-      let elements = [<div className="space-holder"></div>, <a href={theHref}><div className="second-activity-ticket">Book</div></a>, <div className="second-show-activity-capacity">{parseInt(activity.capacity) - activity.attendees.length} Spots Left</div>]
+      let elements = [<div key="1" className="space-holder"></div>, <a key="2" href={theHref}><div className="second-activity-ticket">Book</div></a>, <div key="3" className="second-show-activity-capacity">{parseInt(activity.capacity) - activity.attendees.length} Spots Left</div>]
       let theHref = "/activities/" + String(activity.id) + "/activity_tickets/new"
       return (
         <div className="second-show-activities-spots-container">

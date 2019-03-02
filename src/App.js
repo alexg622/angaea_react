@@ -10,6 +10,8 @@ import Header from './components/layout/Header'
 import activitiesShow from './components/activities/show'
 import Landing from "./components/layout/Landing"
 import categoriesIndex from './components/categories/Index'
+import About from "./components/layout/about"
+import Contact from "./components/layout/contact"
 
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
@@ -27,6 +29,8 @@ class App extends Component {
          <div className="App">
            <Header />
            <Route exact path="/" component={ Landing } />
+           <Route exact path="/about" component={ About } />
+           <Route exact path="/contact" component={ Contact } />
            <Route exact path="/experiences" component={ categoriesIndex } />
            <Route exact path="/activities/:id" component={ activitiesShow } />
            <Route exact path="/testing" component={ Testing } />
