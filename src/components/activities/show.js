@@ -130,7 +130,6 @@ class Show extends Component {
 
   showOuterContainer (activity) {
     if(activity) {
-      console.log(activity.image);
       return(
         <div className="second-show-activities-mid-container">
           <div className="second-show-activities-mid-right-container"><img className="activity-show-img" onClick={(e) => this.resizeImage(e)} alt="" height="400px" width="400px" src={activity.imageUrl}></img></div>
@@ -149,6 +148,39 @@ class Show extends Component {
     }
   }
 
+  showAttendeesCard(activity) {
+    let result = []
+    for(let i=0; i<activity.attendees.length; i++) {
+      let attendee = activity.attendees[i]
+      let theHref = "/users/" + String(attendee.id)
+      result.push(
+        <div key={attendee.id} className="attendees-card">
+          <div className="attendee-name"><a className="make-me-pretty" href={theHref}>{attendee.name}</a></div>
+          {attendee.imageAttached ? <div className="users-show-image-div"><img className="users-show-image" alt="" src={attendee.imageUrl}/></div> : <div id="user-show-image" className="users-show-image-div">No Image</div>}
+        </div>
+      )
+    }
+    return result
+  }
+
+  showAttendees(activity) {
+    console.log(activity);
+    if(activity) {
+      if(activity.attendees.length > 0) {
+        return(
+          <div className="attendees-container">
+            <div className="attendees-text">Attendees</div>
+            <div className="attendees-cards-container">
+              {this.showAttendeesCard(activity)}
+            </div>
+          </div>
+        )
+      }
+    }
+  }
+
+
+
   render() {
     const {activity} = this.props.activity
     return(
@@ -158,6 +190,7 @@ class Show extends Component {
         <div className="google-maps-container">
           <div id="map" className="map"></div>
         </div>
+        {this.showAttendees(activity)}
       </div>
     )
   }
