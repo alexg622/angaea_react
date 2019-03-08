@@ -6,22 +6,21 @@ export const loginUser = userData => dispatch => {
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
   return axios
-    .post('http://localhost:3001/api/session', userData)
-    .then(res => {
-      localStorage.setItem("isAuthenticated", "true")
-      localStorage.setItem("currentUser", JSON.stringify(res.data.currentUser))
-      return dispatch({
-        type: SET_CURRENT_USER,
-        payload: res.data
-      });
+  .post('http://localhost:3001/api/session', userData)
+  .then(res => {
+    localStorage.setItem("isAuthenticated", "true")
+    localStorage.setItem("currentUser", JSON.stringify(res.data.currentUser))
+    return dispatch({
+      type: SET_CURRENT_USER,
+      payload: res.data
+    });
+  })
+  .catch(err => {
+    return dispatch({
+      type: GET_ERRORS,
+      payload: err
     })
-    .catch(err => {
-      return dispatch({
-        type: GET_ERRORS,
-        payload: err
-      })
-    }
-    );
+  });
 };
 
 export const logoutUser = userId => dispatch => {

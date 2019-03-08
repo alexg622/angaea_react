@@ -9,6 +9,7 @@ import Testing from "./components/testing"
 import Header from './components/layout/Header'
 import activitiesShow from './components/activities/show'
 import Landing from "./components/layout/Landing"
+import usersShow from './components/users/show'
 import categoriesIndex from './components/categories/Index'
 import About from "./components/layout/about"
 import Contact from "./components/layout/contact"
@@ -33,6 +34,7 @@ class App extends Component {
            <Route exact path="/contact" component={ Contact } />
            <Route exact path="/experiences" component={ categoriesIndex } />
            <Route exact path="/activities/:id" component={ activitiesShow } />
+           <Route exact path="/users/:id" component={ usersShow } />
            <Route exact path="/testing" component={ Testing } />
            <Route exact path="/Login" component={ Login } />
          </div>
