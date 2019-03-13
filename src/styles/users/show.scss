@@ -92,6 +92,10 @@
   // height: 25px;
 }
 
+.give-marg-top {
+  margin-top: 15px;
+}
+
 .left-toggle {
   display: flex;
   justify-content: center;
@@ -259,13 +263,27 @@
   margin-bottom: 25px;
 }
 
+.users-show-activities-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+
+.users-upcoming-activities-title {
+  font-size: 25px;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
 .users-upcoming-activities-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 80%;
   margin-top: 100px;
-  display: none;
+  // display: none;
   margin-bottom: 25px;
 }
 

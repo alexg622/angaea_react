@@ -20,7 +20,7 @@ class ActivityCard extends Component {
 
   render() {
     const {activity} = this.props
-    let divClassName = "second-home-card-holder " + this.props.margTop
+    let divClassName = "second-home-card-holder " + this.props.marginTop
     return(
 
       <div className={divClassName}>

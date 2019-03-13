@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUser } from '../../actions/users/userActions'
+import ActivityCard from '../categories/activityCard'
+import NewActivityForm from '../activities/NewActivityForm'
 import "../../styles/users/show.scss"
 
 class Show extends Component {
@@ -11,6 +13,30 @@ class Show extends Component {
 
   componentDidMount() {
     this.props.getUser(this.props.match.params.id)
+  }
+
+  showActivitiesHelper(activities) {
+    let result = []
+    for(let i=0; i<activities.length; i++) {
+      result.push(<ActivityCard key={String(i)} currentUser={this.props.currentUser} activity={activities[i]} marginTop={"give-marg-top"}/>)
+    }
+    return result
+  }
+
+  showActivities(activities) {
+    if(activities && activities.length > 0) {
+      return (
+        <div className="users-upcoming-activities-container">
+          {this.showActivitiesHelper(activities)}
+        </div>
+      )
+    } else {
+      return (
+        <div className="users-upcoming-activities-container">
+          <div className="no-data">No Upcoming Experiences</div>
+        </div>
+      )
+    }
   }
 
   showUserPic(user) {
@@ -65,8 +91,32 @@ class Show extends Component {
     }
   }
 
+  showToggleUpper(user, currentUser) {
+    if(user.id === currentUser.id) {
+      return <div className="left-toggle">Your Experiences</div>
+    } else {
+      return <div className="left-toggle">{user.name}s Experiences</div>
+    }
+  }
+
+  showToggleLower(user, currentUser) {
+    if(currentUser.id === user.id) {
+      return <div className="upcoming-activities-toggle">Your Services</div>
+    }
+  }
+
+  showToggle(user, currentUser) {
+    return (
+      <div className="toggle-bar">
+        {this.showToggleUpper(user, currentUser)}
+        {this.showToggleLower(user, currentUser)}
+      </div>
+    )
+  }
+
+
   render() {
-    const { user } = this.props
+    const { user, currentUser } = this.props
     return(
       <div className="users-show-container">
         <div className="users-top-container">
@@ -98,6 +148,15 @@ class Show extends Component {
             </div>
           </div>
         </div>
+        {this.showToggle(user, currentUser)}
+        <div className="users-show-activities-container">
+          <div className="create-activity-toggle">Create an Experience</div>
+          <div className="users-upcoming-activities-title">Your Activities</div>
+          {this.showActivities(user.activities)}
+          <div className="users-upcoming-activities-title">Upcoiming Activities</div>
+          {this.showActivities(user.upcoming_activities)}
+        </div>
+        <NewActivityForm />
       </div>
     )
   }
