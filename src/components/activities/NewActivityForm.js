@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "../../styles/activities/new_activity_form.scss"
+
 class NewActivityForm extends Component {
   constructor() {
     super()
@@ -9,7 +10,7 @@ class NewActivityForm extends Component {
       contact_number: "",
       cost: "",
       capacity: "",
-      category: "",
+      category: "art",
       recurring_schedule: "",
       content: "",
       additional_info: "",
@@ -17,22 +18,69 @@ class NewActivityForm extends Component {
       city: "",
       state: "",
       zip: "",
-      start_date: "",
-      end_date: "",
+      start_date: new Date(),
+      end_date: new Date(),
       image: "",
       images: ""
     }
+    this.isImgAttached = this.isImgAttached.bind(this)
+    this.isImgsAttached = this.isImgsAttached.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  isImgAttached(e) {
+    let inputText = document.querySelector(".second-activity-new-image")
+    let inputImg = document.querySelector(".dont-display-image")
+    if(inputImg.value !== "") {
+      console.log(inputImg.files);
+      this.setState({image: e.target.files[0]})
+      inputText.placeholder = "Image Attached"
+    }
+  }
+
+  isImgsAttached(e) {
+    let inputText = document.querySelector(".activity-new-images")
+    let inputImg = document.querySelector(".dont-display-images")
+    let result = []
+    if(inputImg.value !== "") {
+      if(e.target.files.length > 0) {
+        for(let i=0; i<e.target.files.length; i++) {
+          result.push(e.target.files[i])
+        }
+        this.setState({images: result})
+      }
+      inputText.placeholder = "Images Attached"
+    }
+  }
+
+  clickFileImage() {
+    // let inputText = document.querySelector(".second-activity-new-image")
+    let inputImg = document.querySelector(".dont-display-image")
+    inputImg.click()
+  }
+
+  clickFileImages() {
+    // let inputText = document.querySelector(".activity-new-images")
+    let inputImgs = document.querySelector(".dont-display-images")
+    inputImgs.click()
   }
 
   handleChange(name) {
     return e => this.setState({[name]: e.target.value})
   }
 
+  handleSubmit(e) {
+    e.preventDefault()
+    let activity = this.state
+    this.props.createActivity({activity: activity}).then(res => console.log(res))
+    console.log(activity);
+  }
+
   render() {
     return (
       <div className="display-it-none second-create-activity-form-container">
         <h1>Create Your Experience</h1>
-        <form className="date-className second-create-activity-form-css">
+        <form onSubmit={this.handleSubmit} className="date-className second-create-activity-form-css">
           <div className="second-activity-new-personal-info-container">
             <input className="red-border new-activity-name" type="text" name="activity[activity_name]" placeholder="NAME*" onChange={this.handleChange("activity_name")} value={this.state.activity_name}/>
             <input className="red-border new-activity-email" type="email" name="activity[contact_email]" placeholder="EMAIL*" onChange={this.handleChange("contact_email")} value={this.state.contact_email}/>
@@ -43,7 +91,7 @@ class NewActivityForm extends Component {
             <input className="red-border second-activity-new-cost" type="text" name="activity[cost]" placeholder="PRICE*" onChange={this.handleChange("cost")} value={this.state.cost}/>
             <input className="red-border second-activity-new-capacity" type="text" name="activity[capacity]" placeholder="MAX ATTENDEES*" onChange={this.handleChange("capacity")} value={this.state.capacity}/>
 
-              <select className="red-border second-activity-new-category" name="activity[category]">
+              <select className="red-border second-activity-new-category" name="activity[category]" onChange={this.handleChange("category")}>
                 <option value="art">art*</option>
                 <option value="music">music</option>
                 <option value="food">food</option>
@@ -53,7 +101,7 @@ class NewActivityForm extends Component {
               </select>
 
             <label>
-              <select className="red-border second-activity-new-recurring" name="activity[recurring_schedule]">
+              <select className="red-border second-activity-new-recurring" name="activity[recurring_schedule]" onChange={this.handleChange("recurring_schedule")}>
                 <option value="">One-Time*</option>
                 <option value="weekly">Weekly</option>
                 <option value="bi-weekly">Bi-Weekly</option>
@@ -62,8 +110,8 @@ class NewActivityForm extends Component {
           </div>
 
           <div className="red-border second-activity-new-about-container">
-            <textarea className="second-activity-new-about" name="activity[content]" placeholder="ABOUT SERVICE*"></textarea>
-            <textarea className="second-activity-new-bring" name="activity[additional_info]" placeholder="WHAT TO BRING*"></textarea>
+            <textarea className="second-activity-new-about" name="activity[content]" onChange={this.handleChange("content")} placeholder="ABOUT SERVICE*" value={this.state.content}></textarea>
+            <textarea className="second-activity-new-bring" name="activity[additional_info]" onChange={this.handleChange("additional_info")} placeholder="WHAT TO BRING*" value={this.state.additional_info}></textarea>
           </div>
 
           <div className="red-border second-activity-new-location-container">
@@ -76,49 +124,28 @@ class NewActivityForm extends Component {
           <div className="second-activity-new-date-container">
             <label>
               <div className="second-activity-new-date-text-start">Start Date:*</div>
-              <div className="start-datetime start-datetime-input-container datetime-input-container red-border second-activity-new-date-start">
-                <div className="start-datetime datetime-input datetime-day">00</div>
-                <div className="start-datetime datetime-input datetime-divider">/</div>
-                <div className="start-datetime datetime-input datetime-month">00</div>
-                <div className="start-datetime datetime-input datetime-divider">/</div>
-                <div className="start-datetime datetime-input datetime-year">0000</div>
-                <div className="start-datetime datetime-input datetime-hour"> 00</div>
-                <div className="start-datetime datetime-input datetime-divider">:</div>
-                <div className="start-datetime datetime-input datetime-minute">00</div>
-                <div className="start-datetime datetime-input datetime-ampm">AM</div>
-              </div>
+              <input type="text" className="start-datetime start-datetime-input-container datetime-input-container red-border second-activity-new-date-start" placeholder="format: 00/00/0000 00:00AM" onChange={this.handleChange("start_date")} value={this.state.start_date}/>
               <input className="start-datetime-value start-date" type="hidden" name="activity[start_date]" value=""/>
             </label>
 
             <label>
               <div className="second-activity-new-date-text-end">End Date:*</div>
-              <div className="end-datetime end-datetime-input-container datetime-input-container red-border second-activity-new-date-end">
-                <div className="end-datetime datetime-input end-datetime-day">00</div>
-                <div className="end-datetime datetime-input end-datetime-divider">/</div>
-                <div className="end-datetime datetime-input end-datetime-month">00</div>
-                <div className="end-datetime datetime-input end-datetime-divider">/</div>
-                <div className="end-datetime datetime-input end-datetime-year">0000</div>
-                <div className="end-datetime datetime-input end-datetime-hour left-hour">00</div>
-                <div className="end-datetime datetime-input end-datetime-divider">:</div>
-                <div className="end-datetime datetime-input end-datetime-minute">00</div>
-                <div className="end-datetime datetime-input end-datetime-ampm">AM</div>
-              </div>
-              <input className="end-datetime-value end-date" type="hidden" name="activity[end_date]" value=""/>
+              <input className="end-datetime end-datetime-input-container datetime-input-container red-border second-activity-new-date-end" placeholder="format: 00/00/0000 00:00AM" onChange={this.handleChange("end_date")} value={this.state.end_date}/>
             </label>
           </div>
 
           <div className="second-activity-new-images-container">
             <div className="margin-right-label">
               <div className="bold-it">Main Image*:</div>
-              <input readonly type="text" className="red-border second-activity-new-image" placeholder="UPLOAD IMAGE"/>
+              <input onClick={this.clickFileImage} readOnly type="text" className="red-border second-activity-new-image" placeholder="UPLOAD IMAGE"/>
               <div className="max-file-size">Max File Size 15MB</div>
-              <input className="dont-display-image" type="file" type="hidden" name="activity[image]" value="" multiple="multiple"/>
+              <input onChange={this.isImgAttached} className="dont-display-image" type="file" name="activity[image]" value="" multiple="multiple"/>
             </div>
             <label>
               <div className="Make-normal">Other Images:</div>
-              <input readonly type="text" className="red-border activity-new-images" placeholder="UPLOAD IMAGES"/>
+              <input onClick={this.clickFileImages} readOnly type="text" className="red-border activity-new-images" placeholder="UPLOAD IMAGES"/>
               <div className="max-file-size">Max File Size 15MB</div>
-              <input className="dont-display-images" type="file" name="activity[images][]" value="" multiple="multiple"/>
+              <input onChange={this.isImgsAttached} className="dont-display-images" type="file" name="activity[images][]" value="" multiple="multiple"/>
             </label>
           </div>
 

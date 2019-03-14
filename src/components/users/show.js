@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUser } from '../../actions/users/userActions'
+import { createActivity } from '../../actions/activities/activityActions'
 import ActivityCard from '../categories/activityCard'
 import NewActivityForm from '../activities/NewActivityForm'
 import "../../styles/users/show.scss"
@@ -156,7 +157,7 @@ class Show extends Component {
           <div className="users-upcoming-activities-title">Upcoiming Activities</div>
           {this.showActivities(user.upcoming_activities)}
         </div>
-        <NewActivityForm />
+        <NewActivityForm createActivity={this.props.createActivity}/>
       </div>
     )
   }
@@ -164,6 +165,7 @@ class Show extends Component {
 
 Show.propTypes = {
   getUser: PropTypes.func.isRequired,
+  createActivity: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
@@ -175,4 +177,4 @@ const mapStateToProps = state => ({
   user: state.user.user.currentUser || {}
 })
 
-export default connect(mapStateToProps, { getUser })(Show)
+export default connect(mapStateToProps, { getUser, createActivity })(Show)
