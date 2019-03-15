@@ -157,7 +157,7 @@ class Show extends Component {
           <div className="users-upcoming-activities-title">Upcoiming Activities</div>
           {this.showActivities(user.upcoming_activities)}
         </div>
-        <NewActivityForm createActivity={this.props.createActivity}/>
+        <NewActivityForm createActivity={this.props.createActivity} getUser={this.props.getUser} userId={this.props.match.params.id}/>
       </div>
     )
   }

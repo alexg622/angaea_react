@@ -72,7 +72,7 @@ class NewActivityForm extends Component {
   handleSubmit(e) {
     e.preventDefault()
     let activity = this.state
-    this.props.createActivity({activity: activity}).then(res => console.log(res))
+    this.props.createActivity({activity: activity}).then(res => this.props.getUser(this.props.userId))
     console.log(activity);
   }
 
