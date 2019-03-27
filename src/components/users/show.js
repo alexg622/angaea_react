@@ -8,8 +8,8 @@ import NewActivityForm from '../activities/NewActivityForm'
 import "../../styles/users/show.scss"
 
 class Show extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
   }
 
   componentDidMount() {

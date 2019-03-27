@@ -32,7 +32,6 @@ class NewActivityForm extends Component {
     let inputText = document.querySelector(".second-activity-new-image")
     let inputImg = document.querySelector(".dont-display-image")
     if(inputImg.value !== "") {
-      console.log(inputImg.files);
       this.setState({image: e.target.files[0]})
       inputText.placeholder = "Image Attached"
     }
@@ -47,6 +46,7 @@ class NewActivityForm extends Component {
         for(let i=0; i<e.target.files.length; i++) {
           result.push(e.target.files[i])
         }
+        console.log(result);
         this.setState({images: result})
       }
       inputText.placeholder = "Images Attached"
@@ -71,9 +71,30 @@ class NewActivityForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    let activity = this.state
-    this.props.createActivity({activity: activity}).then(res => this.props.getUser(this.props.userId))
-    console.log(activity);
+    let formData = new FormData();
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' }
+    }
+    for(let i=0; i<this.state.images.length; i++) {
+      formData.append("activity[images][]", this.state.images[i])
+    }
+    formData.set("activity[image]", this.state.image)
+    formData.set("activity[activity_name]", this.state.activity_name)
+    formData.set("activity[contact_email]", this.state.contact_email)
+    formData.set("activity[contact_number]", this.state.contact_number)
+    formData.set("activity[cost]", this.state.cost)
+    formData.set("activity[capacity]", this.state.capacity)
+    formData.set("activity[category", this.state.category)
+    formData.set("activity[recurring_schedule]", this.state.recurring_schedule)
+    formData.set("activity[content]", this.state.content)
+    formData.set("activity[additional_info]", this.state.additional_info)
+    formData.set("activity[addressLN1]", this.state.addressLN1)
+    formData.set("activity[city]", this.state.city)
+    formData.set("activity[state]", this.state.state)
+    formData.set("activity[zip]", this.state.zip)
+    formData.set("activity[start_date]", this.state.start_date)
+    formData.set("activity[end_date]", this.state.end_date)
+    this.props.createActivity(formData, config).then(res => this.props.getUser(this.props.userId))
   }
 
   render() {
@@ -139,13 +160,13 @@ class NewActivityForm extends Component {
               <div className="bold-it">Main Image*:</div>
               <input onClick={this.clickFileImage} readOnly type="text" className="red-border second-activity-new-image" placeholder="UPLOAD IMAGE"/>
               <div className="max-file-size">Max File Size 15MB</div>
-              <input onChange={this.isImgAttached} className="dont-display-image" type="file" name="activity[image]" value="" multiple="multiple"/>
+              <input onChange={this.isImgAttached} className="dont-display-image" type="file" accept="image/*" value=""/>
             </div>
             <label>
               <div className="Make-normal">Other Images:</div>
               <input onClick={this.clickFileImages} readOnly type="text" className="red-border activity-new-images" placeholder="UPLOAD IMAGES"/>
               <div className="max-file-size">Max File Size 15MB</div>
-              <input onChange={this.isImgsAttached} className="dont-display-images" type="file" name="activity[images][]" value="" multiple="multiple"/>
+              <input onChange={this.isImgsAttached} className="dont-display-images" type="file" accept="image/*" value="" multiple/>
             </label>
           </div>
 

@@ -17,8 +17,8 @@ export const getActivity = (id) => dispatch => {
   })
 }
 
-export const createActivity = (activity) => dispatch => {
-  return axios.post(`http://localhost:3001/api/activities`, activity)
+export const createActivity = (activity, config) => dispatch => {
+  return axios.post(`http://localhost:3001/api/activities`, activity, config)
   .then(res => {
     console.log(res);
     return dispatch({
