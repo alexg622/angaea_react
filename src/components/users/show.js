@@ -10,6 +10,8 @@ import "../../styles/users/show.scss"
 class Show extends Component {
   constructor(props){
     super(props)
+    this.activitiesContainer = React.createRef()
+    this.upcomingActivitiesContainer = React.createRef()
   }
 
   componentDidMount() {
@@ -24,10 +26,10 @@ class Show extends Component {
     return result
   }
 
-  showActivities(activities) {
+  showActivities = (activities, theRef) => {
     if(activities && activities.length > 0) {
       return (
-        <div className="users-upcoming-activities-container">
+        <div ref={theRef} className="users-upcoming-activities-container">
           {this.showActivitiesHelper(activities)}
         </div>
       )
@@ -92,11 +94,19 @@ class Show extends Component {
     }
   }
 
+  showUserExperiences = (e) => {
+    this.activitiesContainer.current.style.display = "flex"
+    this.yourActivities.style.display = "flex"
+    this.upcomingActivities.style.display = "flex"
+    this.upcomingActivitiesContainer.current.style.display = "flex"
+    document.querySelector(".display-it-none").style.display = "none"
+  }
+
   showToggleUpper(user, currentUser) {
     if(user.id === currentUser.id) {
-      return <div className="left-toggle">Your Experiences</div>
+      return <div onClick={this.showUserExperiences} className="left-toggle">Your Experiences</div>
     } else {
-      return <div className="left-toggle">{user.name}s Experiences</div>
+      return <div onClick={this.showUserExperiences} className="left-toggle">{user.name}s Experiences</div>
     }
   }
 
@@ -110,9 +120,16 @@ class Show extends Component {
     return (
       <div className="toggle-bar">
         {this.showToggleUpper(user, currentUser)}
-        {this.showToggleLower(user, currentUser)}
       </div>
     )
+  }
+
+  showForm = (e) => {
+    this.activitiesContainer.current.style.display = "none"
+    this.yourActivities.style.display = "none"
+    this.upcomingActivities.style.display = "none"
+    this.upcomingActivitiesContainer.current.style.display = "none"
+    document.querySelector(".display-it-none").style.display = "flex"
   }
 
 
@@ -151,11 +168,11 @@ class Show extends Component {
         </div>
         {this.showToggle(user, currentUser)}
         <div className="users-show-activities-container">
-          <div className="create-activity-toggle">Create an Experience</div>
-          <div className="users-upcoming-activities-title">Your Activities</div>
-          {this.showActivities(user.activities)}
-          <div className="users-upcoming-activities-title">Upcoiming Activities</div>
-          {this.showActivities(user.upcoming_activities)}
+          <div onClick={this.showForm} className="create-activity-toggle">Create an Experience</div>
+          <div ref={yourActivities => this.yourActivities = yourActivities} className="users-upcoming-activities-title">Your Activities</div>
+          {this.showActivities(user.activities, this.activitiesContainer)}
+          <div ref={upcomingActivities => this.upcomingActivities = upcomingActivities} className="users-upcoming-activities-title">Upcoiming Activities</div>
+          {this.showActivities(user.upcoming_activities, this.upcomingActivitiesContainer)}
         </div>
         <NewActivityForm createActivity={this.props.createActivity} getUser={this.props.getUser} userId={this.props.match.params.id}/>
       </div>

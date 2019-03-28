@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import "../../styles/activities/new_activity_form.scss"
 
 class NewActivityForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       activity_name: "",
       contact_email: "",
