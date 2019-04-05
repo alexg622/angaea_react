@@ -13,7 +13,7 @@ import usersShow from './components/users/show'
 import categoriesIndex from './components/categories/Index'
 import About from "./components/layout/about"
 import Contact from "./components/layout/contact"
-
+import categoriesShow from './components/categories/Show'
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
     type: SET_CURRENT_USER,
@@ -30,6 +30,7 @@ class App extends Component {
          <div className="App">
            <Header />
            <Route exact path="/" component={ Landing } />
+           <Route exact path="/categories/:id" component={ categoriesShow } />
            <Route exact path="/about" component={ About } />
            <Route exact path="/contact" component={ Contact } />
            <Route exact path="/experiences" component={ categoriesIndex } />

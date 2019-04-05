@@ -94,7 +94,10 @@ class NewActivityForm extends Component {
     formData.set("activity[zip]", this.state.zip)
     formData.set("activity[start_date]", this.state.start_date)
     formData.set("activity[end_date]", this.state.end_date)
-    this.props.createActivity(formData, config).then(res => this.props.getUser(this.props.userId))
+    this.props.createActivity(formData, config).then(res => {
+
+      this.props.getUser(this.props.userId)
+    })
   }
 
   render() {
