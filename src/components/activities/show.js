@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom"
 import { getActivity } from '../../actions/activities/activityActions'
 import ResizeImage from './resizeImage'
 import { connect } from 'react-redux';
@@ -222,7 +223,7 @@ class Show extends Component {
       let theHref = "/users/" + String(attendee.id)
       result.push(
         <div key={attendee.id} className="attendees-card">
-          <div className="attendee-name"><a className="make-me-pretty" href={theHref}>{attendee.name}</a></div>
+          <div className="attendee-name"><Link className="make-me-pretty" to={theHref}>{attendee.name}</Link></div>
           {attendee.imageAttached ? <div className="users-show-image-div"><img className="users-show-image" alt="" src={attendee.imageUrl}/></div> : <div id="user-show-image" className="users-show-image-div">No Image</div>}
         </div>
       )
@@ -247,7 +248,7 @@ class Show extends Component {
 
   showSpots(activity) {
     if(activity) {
-      let elements = [<div key="1" className="space-holder"></div>, <a key="2" href={theHref}><div className="second-activity-ticket">Book</div></a>, <div key="3" className="second-show-activity-capacity">{parseInt(activity.capacity) - activity.attendees.length} Spots Left</div>]
+      let elements = [<div key="1" className="space-holder"></div>, <Link key={`activity.id`} to={`/activities/${activity.id}/activityTickets/new`}  className="second-activity-ticket">Book</Link>, <div key="3" className="second-show-activity-capacity">{parseInt(activity.capacity) - activity.attendees.length} Spots Left</div>]
       let theHref = "/activities/" + String(activity.id) + "/activity_tickets/new"
       return (
         <div className="second-show-activities-spots-container">

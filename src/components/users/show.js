@@ -56,7 +56,7 @@ class Show extends Component {
 
   showUserFacebook(user) {
     if(user.facebook === "") {
-      return <div style="cursor:pointer"><img alt="" className="logo-facebook" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Facebook_1298738.png?raw=true"/></div>
+      return <div style={{cursor: "pointer"}}><img alt="" className="logo-facebook" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Facebook_1298738.png?raw=true"/></div>
     } else {
       return <div><a target="_blank" rel="noopener noreferrer" href="<%=@user.facebook%>"><img alt="" className="logo-facebook" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Facebook_1298738.png?raw=true"/></a></div>
     }
@@ -64,7 +64,7 @@ class Show extends Component {
 
   showUserInstagram(user) {
     if(user.instagram === "") {
-      return <div style="cursor:pointer"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Instagram_1298747.png?raw=true"/></div>
+      return <div style={{cursor: "pointer"}}><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Instagram_1298747.png?raw=true"/></div>
     } else {
       return <div><a target="_blank" rel="noopener noreferrer" href="<%=@user.instagram%>"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Instagram_1298747.png?raw=true"/></a></div>
     }
@@ -72,7 +72,7 @@ class Show extends Component {
 
   showUserYoutube(user) {
     if (user.youtube === "") {
-      return <div style="cursor:pointer"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_social_media_applications_2-youtube_4102578.png?raw=true"/></div>
+      return <div style={{cursor: "pointer"}}><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_social_media_applications_2-youtube_4102578.png?raw=true"/></div>
     } else {
       return <div><a target="_blank" rel="noopener noreferrer" href="<%=@user.youtube%>"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_social_media_applications_2-youtube_4102578.png?raw=true"/></a></div>
     }
@@ -80,7 +80,7 @@ class Show extends Component {
 
   showUserTwitter(user) {
     if(user.twitter === "") {
-      return <div style="cursor:pointer"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_social_media_applications_6-twitter_4102580.png?raw=true"/></div>
+      return <div style={{cursor: "pointer"}}><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_social_media_applications_6-twitter_4102580.png?raw=true"/></div>
     } else {
       return <div><a target="_blank" rel="noopener noreferrer" href="<%=@user.twitter%>"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_social_media_applications_6-twitter_4102580.png?raw=true"/></a></div>
     }
@@ -88,17 +88,17 @@ class Show extends Component {
 
   showUserPinterest(user) {
     if(user.pinterest === "") {
-      return <div style="cursor:pointer"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Pinterest_1298754.png?raw=true"/></div>
+      return <div style={{cursor: "pointer"}}><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Pinterest_1298754.png?raw=true"/></div>
     } else {
       return <div><a target="_blank" rel="noopener noreferrer" href="<%=@user.twitter%>"><img alt="" className="logo" width="35px" height="35px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/iconfinder_Pinterest_1298754.png?raw=true"/></a></div>
     }
   }
 
   showUserExperiences = (e) => {
-    this.activitiesContainer.current.style.display = "flex"
-    this.yourActivities.style.display = "flex"
-    this.upcomingActivities.style.display = "flex"
-    this.upcomingActivitiesContainer.current.style.display = "flex"
+    if(this.activitiesContainer.current !== null) this.activitiesContainer.current.style.display = "flex"
+    if(this.yourActivities.current !== null) this.yourActivities.style.display = "flex"
+    if(this.upcomingActivities.current !== null) this.upcomingActivities.style.display = "flex"
+    if(this.upcomingActivitiesContainer.current !== null) this.upcomingActivitiesContainer.current.style.display = "flex"
     document.querySelector(".display-it-none").style.display = "none"
   }
 
@@ -125,16 +125,18 @@ class Show extends Component {
   }
 
   showForm = (e) => {
-    this.activitiesContainer.current.style.display = "none"
-    this.yourActivities.style.display = "none"
-    this.upcomingActivities.style.display = "none"
-    this.upcomingActivitiesContainer.current.style.display = "none"
+    if(this.activitiesContainer.current !== null) this.activitiesContainer.current.style.display = "none"
+    if(this.yourActivities.current !== null) this.yourActivities.style.display = "none"
+    if(this.upcomingActivities.current !== null) this.upcomingActivities.style.display = "none"
+    if(this.upcomingActivitiesContainer.current !== null) this.upcomingActivitiesContainer.current.style.display = "none"
     document.querySelector(".display-it-none").style.display = "flex"
+    console.log("here");
   }
 
 
   render() {
     const { user, currentUser } = this.props
+    console.log(user);
     return(
       <div className="users-show-container">
         <div className="users-top-container">

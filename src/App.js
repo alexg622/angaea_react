@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SET_CURRENT_USER } from "./actions/types"
 import Login from './components/session/Login'
@@ -14,6 +14,9 @@ import categoriesIndex from './components/categories/Index'
 import About from "./components/layout/about"
 import Contact from "./components/layout/contact"
 import categoriesShow from './components/categories/Show'
+import usersNew from './components/users/new'
+import NewActivityTicket from "./components/activities/NewActivityTicket"
+
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
     type: SET_CURRENT_USER,
@@ -29,15 +32,19 @@ class App extends Component {
        <Router>
          <div className="App">
            <Header />
-           <Route exact path="/" component={ Landing } />
-           <Route exact path="/categories/:id" component={ categoriesShow } />
-           <Route exact path="/about" component={ About } />
-           <Route exact path="/contact" component={ Contact } />
-           <Route exact path="/experiences" component={ categoriesIndex } />
-           <Route exact path="/activities/:id" component={ activitiesShow } />
-           <Route exact path="/users/:id" component={ usersShow } />
-           <Route exact path="/testing" component={ Testing } />
-           <Route exact path="/Login" component={ Login } />
+           <Switch>
+             <Route exact path="/" component={ Landing } />
+             <Route exact path="/categories/:id" component={ categoriesShow } />
+             <Route exact path="/about" component={ About } />
+             <Route exact path="/users/new" component={usersNew} />
+             <Route exact path="/contact" component={ Contact } />
+             <Route exact path="/experiences" component={ categoriesIndex } />
+             <Route exact path="/activities/:id" component={ activitiesShow } />
+             <Route exact path="/activities/:id/activityTickets/new" component={ NewActivityTicket } />
+             <Route exact path="/users/:id" component={ usersShow } />
+             <Route exact path="/testing" component={ Testing } />
+             <Route exact path="/Login" component={ Login } />
+          </Switch>
          </div>
        </Router>
      </Provider>

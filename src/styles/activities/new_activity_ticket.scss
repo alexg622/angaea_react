@@ -1,0 +1,78 @@
+.new-activity-ticket-container {
+  width: 100%;
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;  
+}
+
+.checkout-text {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.checkout-container {
+  width: 40%;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+}
+
+.service-purchase-container {
+  display:flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.purchase-text {
+  font-weight: bold;
+}
+
+.spots-container {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+.spots-text {
+  font-weight: bold;
+}
+
+.price-container {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+.price-text {
+  font-weight: bold;
+}
+
+.service-fee-container {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+.service-fee-text {
+  font-weight: bold;
+}
+
+.total-container {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.total-text {
+  font-weight: bold;
+}
+
+.checkout-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
