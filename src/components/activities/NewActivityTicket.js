@@ -4,6 +4,7 @@ import { getActivity } from '../../actions/activities/activityActions'
 import { connect } from 'react-redux';
 import "../../styles/activities/new_activity_ticket.scss"
 import StripeCheckout from 'react-stripe-checkout';
+import axios from "axios"
 
 class NewActivityTicket extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class NewActivityTicket extends Component {
       serviceFee: 0.10,
       numberOfSpots: 1,
       total: 0.0,
-      startingTotal: 0.0
+      startingTotal: 0.0,
+      amount: 0.0,
+      email: ""
     }
   }
 
@@ -24,19 +27,33 @@ class NewActivityTicket extends Component {
       let startingTotal = total
       let serviceFee = Math.round((total*.1) * 100) / 100
       total += serviceFee
-      if(activity) this.setState({total, serviceFee, startingTotal})
+      let amount = total*100
+      if(activity) this.setState({total, serviceFee, startingTotal, amount})
+    })
+  }
+
+  sendToken = ( token, id ) => {
+    let {total, email, numberOfSpots} = this.state
+    let jsonToken = token
+    axios.defaults.xsrfCookieName = "CSRF-TOKEN";
+    axios.defaults.xsrfHeaderName = "X-CSRF-Token";
+    axios.defaults.withCredentials = true;
+    axios.post(
+      `http://localhost:3001/api/activities/${id}/activity_tickets`,
+      {jsonToken, email, total, numberOfSpots}
+    )
+    .then(res => {
+      return this.props.history.push(`/activities/${id}`)
+    })
+    .catch(err => {
+      return {error: err}
     })
   }
 
   onToken = (token) => {
-    fetch('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
-      });
-    });
+    let id = this.props.match.params.id
+    this.sendToken(token, id)
+
   }
 
   showActivityName = ( activity ) => {
@@ -48,17 +65,35 @@ class NewActivityTicket extends Component {
   }
 
   handleChange = ( e ) => {
-    let total = e.target.value * this.state.startingTotal
+    let numberOfSpots = e.target.value
+    let total = numberOfSpots * this.state.startingTotal
     let serviceFee = Math.round((total*.1) * 100) / 100
     total += serviceFee
-    this.setState({ serviceFee, total })
+    let amount = total*100
+
+    this.setState({ serviceFee, total, amount, numberOfSpots })
+  }
+
+  showDescription = (activity) => {
+    let { total, numberOfSpots, startingTotal } = this.state
+    if(activity) {
+      if(numberOfSpots === 1) {
+        return `Purchasing 1 spot for $${total}`
+      } else {
+        return `Purchasing ${numberOfSpots} spots for $${total}`
+      }
+      return `Spots: ${numberOfSpots} \n Total: $${total}`
+    }
+  }
+
+  handleEmail = field => {
+    return e => this.setState({[field]: e.target.value})
   }
 
   render() {
-    let {activity} = this.props.activity
-    let {serviceFee, total} = this.state
-    window.props = this.props
-    window.activity = activity
+    let { activity } = this.props.activity
+    let { serviceFee, total, amount, email } = this.state
+
     return (
       <div className="new-activity-ticket-container">
         <div className="checkout-text">Checkout</div>
@@ -91,13 +126,21 @@ class NewActivityTicket extends Component {
             <div className="service-fee">${serviceFee}</div>
           </div>
           <div className="total-container">
-            <div className="total-text">Total</div>
+            <div className="total-text">Total:</div>
             <div className="total">${total}</div>
+          </div>
+          <div className="email-container">
+            <div className="email-text">Please Enter an Email for Receipt:</div>
+            <input className="email-input" type="email" onChange={this.handleEmail("email")} value={this.state.email} />
           </div>
           <div className="checkout-button-container">
             <StripeCheckout
             token={this.onToken}
             stripeKey="pk_test_5PyDLCL5P1YphotVNprAxyBR"
+            amount={amount}
+            name={"Angaea"}
+            email={email}
+            description={this.showDescription(activity)}
             />
           </div>
         </div>
@@ -121,4 +164,4 @@ const mapStateToProps = state => {
   return values
 }
 
-export default connect(mapStateToProps, {getActivity})(NewActivityTicket)
+export default connect(mapStateToProps, { getActivity })(NewActivityTicket)
