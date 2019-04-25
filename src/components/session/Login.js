@@ -32,7 +32,7 @@ class Login extends Component{
         return
       } else {
         console.log("hers");
-        return this.props.history.push("/users" + String(this.props.currentUser.id))
+        return this.props.history.push("/users/" + String(this.props.currentUser.id))
       }
     })
   }

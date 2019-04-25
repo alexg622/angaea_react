@@ -16,6 +16,7 @@ import Contact from "./components/layout/contact"
 import categoriesShow from './components/categories/Show'
 import usersNew from './components/users/new'
 import NewActivityTicket from "./components/activities/NewActivityTicket"
+import NewStripe from './components/stripe/new'
 
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
@@ -41,6 +42,7 @@ class App extends Component {
              <Route exact path="/experiences" component={ categoriesIndex } />
              <Route exact path="/activities/:id" component={ activitiesShow } />
              <Route exact path="/activities/:id/activityTickets/new" component={ NewActivityTicket } />
+             <Route exact path="/stripe/:id/new" component={ NewStripe } />
              <Route exact path="/users/:id" component={ usersShow } />
              <Route exact path="/testing" component={ Testing } />
              <Route exact path="/Login" component={ Login } />
