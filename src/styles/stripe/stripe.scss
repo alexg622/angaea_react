@@ -105,6 +105,9 @@
   height: 45px;
   margin-top: 40px;
   width: 25%;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .stripe-details-text {

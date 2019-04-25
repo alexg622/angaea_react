@@ -17,6 +17,9 @@ import categoriesShow from './components/categories/Show'
 import usersNew from './components/users/new'
 import NewActivityTicket from "./components/activities/NewActivityTicket"
 import NewStripe from './components/stripe/new'
+import StripeTerms from './components/stripe/terms'
+import AcctDetails from './components/stripe/accountDetails'
+import StripeAcct from './components/stripe/stripeAcct'
 
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
@@ -46,6 +49,9 @@ class App extends Component {
              <Route exact path="/users/:id" component={ usersShow } />
              <Route exact path="/testing" component={ Testing } />
              <Route exact path="/Login" component={ Login } />
+             <Route exact path="/stripe/:id/terms/new" component={ StripeTerms } />
+             <Route exact path="/stripe/:id/stripe_acct_details" component={ AcctDetails } />
+             <Route exact path="/stripe/:id/stripe_acct" component={ StripeAcct } />
           </Switch>
          </div>
        </Router>

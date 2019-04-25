@@ -81,7 +81,8 @@ class Show extends Component {
   }
 
   showMidContainer(activity) {
-    if(activity) {
+    console.log(activity);
+    if(activity !== undefined) {
       return(
         <div className="second-show-activities-lower-mid-container">
           <div className="second-show-activities-where-container">

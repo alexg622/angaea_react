@@ -41,7 +41,6 @@ class Header extends Component {
         </div>
         <div className="right-header">
           <Link className="header-services header-right" to="/experiences">Experiences</Link>
-          <Link className="header-dashboard header-right" to="/dashboard">Dashboard</Link>
           <Link className="header-about header-right" to="/about">About</Link>
           <Link className="header-contact header-right" to="/contact">Contact</Link>
           {this.loginLink()}

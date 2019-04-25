@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "../../styles/stripe/stripe.scss"
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { updateCurrentUser } from "../../actions/session/auth"
 import axios from "axios"
 
 class NewStripe extends Component {
@@ -10,23 +11,17 @@ class NewStripe extends Component {
     super(props)
   }
 
-  createStripeClient = (id) => {
-    axios.defaults.xsrfCookieName = "CSRF-TOKEN";
-    axios.defaults.xsrfHeaderName = "X-CSRF-Token";
-    axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:3001/api/stripe/${id}/create`)
-    .then(res => this.props.history.push(`/stripe/${id}/terms/new`))
-    .catch(err => console.log(err))
-  }
-
   handleSubmit = (e) => {
     let {currentUser} = this.props
+    let id = currentUser.id
+    let url = `http://localhost:3001/api/stripe/${currentUser.id}/create`
     e.preventDefault()
-    this.createStripeClient(currentUser.id)
+    this.props.updateCurrentUser(url)
+    .then(res => this.props.history.push(`/stripe/${id}/terms/new`))
   }
 
   render() {
-    console.log(this.props);
+    window.currentUser = this.props.currentUser
     return (
       <div className="create-stripe-accnt-form-container">
         <div className="create-stripe-new-text">Before creating a service lets get started with setting up your payment information to get you paid!
@@ -42,7 +37,8 @@ class NewStripe extends Component {
 }
 
 NewStripe.propTypes = {
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  updateCurrentUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -52,4 +48,4 @@ const mapStateToProps = state => {
   return values
 }
 
-export default connect(mapStateToProps, {})(NewStripe)
+export default connect(mapStateToProps, { updateCurrentUser })(NewStripe)
