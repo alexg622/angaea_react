@@ -232,21 +232,6 @@ class Show extends Component {
     return result
   }
 
-  showAttendees(activity) {
-    if(activity) {
-      if(activity.attendees.length > 0) {
-        return(
-          <div className="attendees-container">
-            <div className="attendees-text">Attendees</div>
-            <div className="attendees-cards-container">
-              {this.showAttendeesCard(activity)}
-            </div>
-          </div>
-        )
-      }
-    }
-  }
-
   showSpots(activity) {
     if(activity) {
       let elements = [<div key="1" className="space-holder"></div>, <Link key={`activity.id`} to={`/activities/${activity.id}/activityTickets/new`}  className="second-activity-ticket">Book</Link>, <div key="3" className="second-show-activity-capacity">{parseInt(activity.capacity) - activity.attendees.length} Spots Left</div>]
@@ -270,7 +255,6 @@ class Show extends Component {
           <div id="map" className="map"></div>
         </div>
         {this.showSpots(activity)}
-        {this.showAttendees(activity)}
       </div>
     )
   }

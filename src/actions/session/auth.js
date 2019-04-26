@@ -135,3 +135,25 @@ export const deleteStripe = (id) => dispatch => {
     })
   });
 };
+
+export const setCurrentUser = (id) => dispatch => {
+  axios.defaults.xsrfCookieName = "CSRF-TOKEN";
+  axios.defaults.xsrfHeaderName = "X-CSRF-Token";
+  axios.defaults.withCredentials = true;
+  return axios.get(`http://localhost:3001/api/users/${id}`)
+    .then(res => {
+      console.log("in the res");
+      localStorage.setItem("isAuthenticated", "true")
+      localStorage.setItem("currentUser", JSON.stringify(res.data.currentUser))
+      return dispatch({
+        type: SET_CURRENT_USER,
+        payload: res.data
+      });
+    })
+  .catch(err => {
+    return dispatch({
+      type: GET_ERRORS,
+      payload: err
+    })
+  })
+}

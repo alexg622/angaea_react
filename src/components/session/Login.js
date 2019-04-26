@@ -51,7 +51,7 @@ class Login extends Component{
             </div>
             <div className="login-signup-container">
               <div className="login-signup-text">New to The Site?</div>
-              <a className="best-btn no-underline" href='/users/new'>Create My Portfolio</a>
+              <Link className="best-btn no-underline" to='/users/new'>Create My Portfolio</Link>
               <div className="login-signup-center"></div>
             </div>
             <Link className="reset-password" to="/users/resetPasswordLink">Reset Password</Link>

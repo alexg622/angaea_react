@@ -163,8 +163,8 @@ class New extends Component{
 
           <div className="agreements">
             <div className="agreement-links">
-              <a className="terms-conditions-link" href="/showTermsConditions">Terms and Conditions Agreement</a>
-              <a className="privacy-agreement-link" href="/showPrivacyAgreement">Privacy Agreement</a>
+              <Link className="terms-conditions-link" to="/termsAndConditions">Terms and Conditions Agreement</Link>
+              <Link className="privacy-agreement-link" to="/privacyAgreement">Privacy Agreement</Link>
             </div>
             <div className="text-agreement">
               <div>By Checking This Box You Agree To Having Read and Accepted The Terms and Conditions and Privacy Agreement</div>

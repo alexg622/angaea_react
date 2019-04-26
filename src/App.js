@@ -20,6 +20,8 @@ import NewStripe from './components/stripe/new'
 import StripeTerms from './components/stripe/terms'
 import AcctDetails from './components/stripe/accountDetails'
 import StripeAcct from './components/stripe/stripeAcct'
+import ShowTermsAndConditions from './components/terms/showTermsAndConditions'
+import PrivacyAgreement from './components/terms/privacyAgreement'
 
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
@@ -27,7 +29,6 @@ if(localStorage.isAuthenticated === "true") {
     payload: {currentUser: JSON.parse(localStorage.currentUser)}
   })
 }
-
 
 class App extends Component {
   render() {
@@ -52,6 +53,8 @@ class App extends Component {
              <Route exact path="/stripe/:id/terms/new" component={ StripeTerms } />
              <Route exact path="/stripe/:id/stripe_acct_details" component={ AcctDetails } />
              <Route exact path="/stripe/:id/stripe_acct" component={ StripeAcct } />
+             <Route exact path="/termsAndConditions" component={ ShowTermsAndConditions } />
+             <Route exact path="/privacyAgreement" component={ PrivacyAgreement } />
           </Switch>
          </div>
        </Router>
@@ -59,6 +62,5 @@ class App extends Component {
    );
  }
 }
-
 
 export default App;

@@ -25,9 +25,10 @@ class Header extends Component {
 
   showAccount() {
     if(this.props.auth.isAuthenticated) {
-      return (
-        <Link className="header-account header-right" to={`/users/${this.props.currentUser.id}`}>Account</Link>
-      )
+      return [
+        <Link className="header-account header-right" to={`/users/${this.props.currentUser.id}`}>Account</Link>,
+        <Link className="header-account header-right" to={`/stripe/${this.props.currentUser.id}/stripe_acct`}>Payments</Link>
+      ]
     }
   }
 
