@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import "../../styles/activities/new_activity_form.scss"
+import { connect } from 'react-redux'
+import { getActivity, editActivity } from '../../actions/activities/activityActions'
+import PropTypes from 'prop-types'
 
-class NewActivityForm extends Component {
+class EditActivityForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -10,7 +13,6 @@ class NewActivityForm extends Component {
       contact_number: "",
       cost: "",
       capacity: "",
-      category: "art",
       recurring_schedule: "",
       content: "",
       additional_info: "",
@@ -26,6 +28,46 @@ class NewActivityForm extends Component {
     this.isImgAttached = this.isImgAttached.bind(this)
     this.isImgsAttached = this.isImgsAttached.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  async componentDidMount() {
+    await this.props.getActivity(this.props.match.params.id)
+
+    let {
+      activity_name,
+      contact_email,
+      contact_number,
+      cost,
+      capacity,
+      recurring,
+      recurring_schedule,
+      content,
+      additional_info,
+      addressLN1,
+      city,
+      state,
+      zip,
+      start_date,
+      end_date,
+    } = this.props.activity.activity
+
+    this.setState({
+      activity_name,
+      contact_email,
+      contact_number,
+      cost,
+      capacity,
+      recurring,
+      recurring_schedule,
+      content,
+      additional_info,
+      addressLN1,
+      city,
+      state,
+      zip,
+      start_date,
+      end_date,
+    })
   }
 
   isImgAttached(e) {
@@ -69,7 +111,7 @@ class NewActivityForm extends Component {
     return e => this.setState({[name]: e.target.value})
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
     let formData = new FormData();
     const config = {
@@ -84,7 +126,6 @@ class NewActivityForm extends Component {
     formData.set("activity[contact_number]", this.state.contact_number)
     formData.set("activity[cost]", this.state.cost)
     formData.set("activity[capacity]", this.state.capacity)
-    formData.set("activity[category", this.state.category)
     formData.set("activity[recurring_schedule]", this.state.recurring_schedule)
     formData.set("activity[content]", this.state.content)
     formData.set("activity[additional_info]", this.state.additional_info)
@@ -94,15 +135,14 @@ class NewActivityForm extends Component {
     formData.set("activity[zip]", this.state.zip)
     formData.set("activity[start_date]", this.state.start_date)
     formData.set("activity[end_date]", this.state.end_date)
-    this.props.createActivity(formData, config).then(res => {
 
-      this.props.getUser(this.props.userId)
-    })
+    await this.props.editActivity(formData, config, this.props.match.params.id)
+    this.props.history.push(`/activities/${this.props.match.params.id}`)
   }
 
   render() {
     return (
-      <div className="display-it-none second-create-activity-form-container">
+      <div className="second-create-activity-form-container">
         <h1>Create Your Experience</h1>
         <form onSubmit={this.handleSubmit} className="date-className second-create-activity-form-css">
           <div className="second-activity-new-personal-info-container">
@@ -114,15 +154,6 @@ class NewActivityForm extends Component {
           <div className="second-activity-new-price-info-container">
             <input className="red-border second-activity-new-cost" type="text" name="activity[cost]" placeholder="PRICE*" onChange={this.handleChange("cost")} value={this.state.cost}/>
             <input className="red-border second-activity-new-capacity" type="text" name="activity[capacity]" placeholder="MAX ATTENDEES*" onChange={this.handleChange("capacity")} value={this.state.capacity}/>
-
-              <select className="red-border second-activity-new-category" name="activity[category]" onChange={this.handleChange("category")}>
-                <option value="art">art*</option>
-                <option value="music">music</option>
-                <option value="food">food</option>
-                <option value="dance">dance</option>
-                <option value="theatre">theatre</option>
-                <option value="comedy">comedy</option>
-              </select>
 
             <label>
               <select className="red-border second-activity-new-recurring" name="activity[recurring_schedule]" onChange={this.handleChange("recurring_schedule")}>
@@ -180,4 +211,18 @@ class NewActivityForm extends Component {
   }
 }
 
-export default NewActivityForm
+EditActivityForm.propTypes = {
+  getActivity: PropTypes.func.isRequired,
+  editActivity: PropTypes.func.isRequired,
+  activity: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => {
+  let values = {
+    errors: state.errors,
+    activity: state.activity.activity
+  }
+  return values
+}
+
+export default connect(mapStateToProps, { getActivity, editActivity })(EditActivityForm)

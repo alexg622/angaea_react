@@ -22,6 +22,7 @@ import AcctDetails from './components/stripe/accountDetails'
 import StripeAcct from './components/stripe/stripeAcct'
 import ShowTermsAndConditions from './components/terms/showTermsAndConditions'
 import PrivacyAgreement from './components/terms/privacyAgreement'
+import EditActivityForm from './components/activities/EditActivityForm'
 
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
@@ -44,6 +45,7 @@ class App extends Component {
              <Route exact path="/users/new" component={usersNew} />
              <Route exact path="/contact" component={ Contact } />
              <Route exact path="/experiences" component={ categoriesIndex } />
+             <Route exact path="/activities/:id/edit" component={ EditActivityForm } />
              <Route exact path="/activities/:id" component={ activitiesShow } />
              <Route exact path="/activities/:id/activityTickets/new" component={ NewActivityTicket } />
              <Route exact path="/stripe/:id/new" component={ NewStripe } />

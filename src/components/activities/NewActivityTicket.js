@@ -39,7 +39,7 @@ class NewActivityTicket extends Component {
     axios.defaults.xsrfHeaderName = "X-CSRF-Token";
     axios.defaults.withCredentials = true;
     axios.post(
-      `http://localhost:3001/api/activities/${id}/activity_tickets`,
+      `https://www.angaea.com/api/activities/${id}/activity_tickets`,
       {jsonToken, email, total, numberOfSpots}
     )
     .then(res => {

@@ -14,7 +14,7 @@ class NewStripe extends Component {
   handleSubmit = (e) => {
     let {currentUser} = this.props
     let id = currentUser.id
-    let url = `http://localhost:3001/api/stripe/${currentUser.id}/create`
+    let url = `https://www.angaea.com/api/stripe/${currentUser.id}/create`
     e.preventDefault()
     this.props.updateCurrentUser(url)
     .then(res => this.props.history.push(`/stripe/${id}/terms/new`))

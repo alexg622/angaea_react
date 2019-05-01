@@ -36,7 +36,7 @@ class AcctDetails extends Component {
 
     let { currentUser } = this.props
     let id = currentUser.id
-    let url = `http://localhost:3001/api/stripe/${currentUser.id}/stripe_acct_details`
+    let url = `https://www.angaea.com/api/stripe/${currentUser.id}/stripe_acct_details`
     let formData = new FormData()
 
     formData.set("stripe_connect[routing_number]", this.state.routing_number)

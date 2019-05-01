@@ -5,7 +5,7 @@ export const getUser = userId => dispatch => {
   axios.defaults.xsrfCookieName = "CSRF-TOKEN";
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
-  return axios.get(`http://localhost:3001/api/users/${userId}`)
+  return axios.get(`https://www.angaea.com/api/users/${userId}`)
   .then(res => {
     return dispatch({
       type: GET_USER,

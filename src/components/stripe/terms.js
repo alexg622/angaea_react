@@ -10,7 +10,7 @@ class Terms extends Component {
   handleSubmit = (e) => {
     let { currentUser } = this.props
     let id = currentUser.id
-    let url = `http://localhost:3001/api/stripe/${id}/terms/create`
+    let url = `https://www.angaea.com/api/stripe/${id}/terms/create`
     e.preventDefault()
     this.props.updateCurrentUser(url)
       .then(res => this.props.history.push(`/stripe/${id}/stripe_acct_details`))

@@ -6,7 +6,7 @@ export const loginUser = userData => dispatch => {
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
   return axios
-  .post('http://localhost:3001/api/session', userData)
+  .post('https://www.angaea.com/api/session', userData)
   .then(res => {
     localStorage.setItem("isAuthenticated", "true")
     localStorage.setItem("currentUser", JSON.stringify(res.data.currentUser))
@@ -27,7 +27,7 @@ export const createUser = data => dispatch => {
   axios.defaults.xsrfCookieName = "CSRF-TOKEN";
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
-  return axios.post(`http://localhost:3001/api/users`, data)
+  return axios.post(`https://www.angaea.com/api/users`, data)
   .then(res => {
     localStorage.setItem("isAuthenticated", "true")
     localStorage.setItem("currentUser", JSON.stringify(res.data.currentUser))
@@ -50,7 +50,7 @@ export const logoutUser = userId => dispatch => {
   axios.defaults.withCredentials = true;
   localStorage.setItem("isAuthenticated", "false")
   localStorage.setItem("currentUser", "")
-  return axios.delete("http://localhost:3001/api/session", userId)
+  return axios.delete("https://www.angaea.com/api/session", userId)
     .then(res => {
       return dispatch({
         type: CLEAR_CURRENT_USER
@@ -119,7 +119,7 @@ export const deleteStripe = (id) => dispatch => {
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
   return axios
-  .delete(`http://localhost:3001/api//stripe/${id}/delete_stripe_acct`)
+  .delete(`https://www.angaea.com/api//stripe/${id}/delete_stripe_acct`)
   .then(res => {
     localStorage.setItem("isAuthenticated", "true")
     localStorage.setItem("currentUser", JSON.stringify(res.data.currentUser))
@@ -140,7 +140,7 @@ export const setCurrentUser = (id) => dispatch => {
   axios.defaults.xsrfCookieName = "CSRF-TOKEN";
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
-  return axios.get(`http://localhost:3001/api/users/${id}`)
+  return axios.get(`https://www.angaea.com/api/users/${id}`)
     .then(res => {
       console.log("in the res");
       localStorage.setItem("isAuthenticated", "true")

@@ -267,7 +267,6 @@ Show.propTypes = {
 }
 
 const mapStateToProps = state => {
-  window.state = state
   let values = {
     errors: state.errors,
     currentUser: state.auth.currentUser || {},

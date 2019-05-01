@@ -11,7 +11,7 @@ class Show extends Component {
   constructor(props){
     super(props)
     this.activitiesContainer = React.createRef()
-    this.upcomingActivitiesContainer = React.createRef()
+    // this.upcomingActivitiesContainer = React.createRef()
   }
 
   componentDidMount() {
@@ -97,8 +97,8 @@ class Show extends Component {
   showUserExperiences = (e) => {
     if(this.activitiesContainer.current !== null) this.activitiesContainer.current.style.display = "flex"
     if(this.yourActivities.current !== null) this.yourActivities.style.display = "flex"
-    if(this.upcomingActivities.current !== null) this.upcomingActivities.style.display = "flex"
-    if(this.upcomingActivitiesContainer.current !== null) this.upcomingActivitiesContainer.current.style.display = "flex"
+    // if(this.upcomingActivities.current !== null) this.upcomingActivities.style.display = "flex"
+    // if(this.upcomingActivitiesContainer.current !== null) this.upcomingActivitiesContainer.current.style.display = "flex"
     document.querySelector(".display-it-none").style.display = "none"
   }
 
@@ -127,8 +127,8 @@ class Show extends Component {
   showForm = (e) => {
     if(this.activitiesContainer.current !== null) this.activitiesContainer.current.style.display = "none"
     if(this.yourActivities.current !== null) this.yourActivities.style.display = "none"
-    if(this.upcomingActivities.current !== null) this.upcomingActivities.style.display = "none"
-    if(this.upcomingActivitiesContainer.current !== null) this.upcomingActivitiesContainer.current.style.display = "none"
+    // if(this.upcomingActivities.current !== null) this.upcomingActivities.style.display = "none"
+    // if(this.upcomingActivitiesContainer.current !== null) this.upcomingActivitiesContainer.current.style.display = "none"
     document.querySelector(".display-it-none").style.display = "flex"
     console.log("here");
   }
@@ -173,8 +173,6 @@ class Show extends Component {
           <div onClick={this.showForm} className="create-activity-toggle">Create an Experience</div>
           <div ref={yourActivities => this.yourActivities = yourActivities} className="users-upcoming-activities-title">Your Activities</div>
           {this.showActivities(user.activities, this.activitiesContainer)}
-          <div ref={upcomingActivities => this.upcomingActivities = upcomingActivities} className="users-upcoming-activities-title">Upcoiming Activities</div>
-          {this.showActivities(user.upcoming_activities, this.upcomingActivitiesContainer)}
         </div>
         <NewActivityForm createActivity={this.props.createActivity} getUser={this.props.getUser} userId={this.props.match.params.id}/>
       </div>

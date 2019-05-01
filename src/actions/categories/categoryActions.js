@@ -5,7 +5,7 @@ export const getCategories = () => dispatch => {
   axios.defaults.xsrfCookieName = "CSRF-TOKEN";
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
-  return axios.get("http://localhost:3001/api/categories")
+  return axios.get("https://www.angaea.com/api/categories")
   .then(res => {
     return dispatch({
       type: GET_CATEGORIES,
@@ -24,7 +24,7 @@ export const getCategory = (id) => dispatch => {
   axios.defaults.xsrfCookieName = "CSRF-TOKEN";
   axios.defaults.xsrfHeaderName = "X-CSRF-Token";
   axios.defaults.withCredentials = true;
-  return axios.get("http://localhost:3001/api/categories/" + id)
+  return axios.get("https://www.angaea.com/api/categories/" + id)
   .then(res => {
     return dispatch({
       type: GET_CATEGORY,
