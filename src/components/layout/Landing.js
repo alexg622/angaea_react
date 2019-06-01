@@ -17,7 +17,7 @@ class Landing extends Component {
             in the best way possible, by letting your passion
             choose you.
           </div>
-          <Link className="best-btn widen" to="/login">Login/Create my Portfolio</Link>
+          <Link className="best-btn widen" to="/login">Login/Create Artist Portfolio</Link>
         </div>
 
         <div className="landing-second-container">

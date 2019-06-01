@@ -170,7 +170,6 @@ class Show extends Component {
         </div>
         {this.showToggle(user, currentUser)}
         <div className="users-show-activities-container">
-          <div onClick={this.showForm} className="create-activity-toggle">Create an Experience</div>
           <div ref={yourActivities => this.yourActivities = yourActivities} className="users-upcoming-activities-title">Your Activities</div>
           {this.showActivities(user.activities, this.activitiesContainer)}
         </div>

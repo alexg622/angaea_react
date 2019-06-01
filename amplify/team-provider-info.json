@@ -1,0 +1,14 @@
+{
+    "production": {
+        "awscloudformation": {
+            "AuthRoleName": "angaeareact-production-20190430233356-authRole",
+            "UnauthRoleArn": "arn:aws:iam::454946467121:role/angaeareact-production-20190430233356-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::454946467121:role/angaeareact-production-20190430233356-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "angaeareact-production-20190430233356-deployment",
+            "UnauthRoleName": "angaeareact-production-20190430233356-unauthRole",
+            "StackName": "angaeareact-production-20190430233356",
+            "StackId": "arn:aws:cloudformation:us-east-1:454946467121:stack/angaeareact-production-20190430233356/18e6cea0-6bdb-11e9-8e7f-0a129e2750f4"
+        }
+    }
+}

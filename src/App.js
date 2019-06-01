@@ -23,6 +23,10 @@ import StripeAcct from './components/stripe/stripeAcct'
 import ShowTermsAndConditions from './components/terms/showTermsAndConditions'
 import PrivacyAgreement from './components/terms/privacyAgreement'
 import EditActivityForm from './components/activities/EditActivityForm'
+import Footer from './components/layout/Footer'
+import LandingRevised from './components/layout/LandingRevised'
+import AboutCreating from './components/layout/aboutCreating'
+import NewContact from './components/layout/newContact'
 
 if(localStorage.isAuthenticated === "true") {
   store.dispatch({
@@ -39,11 +43,13 @@ class App extends Component {
          <div className="App">
            <Header />
            <Switch>
-             <Route exact path="/" component={ Landing } />
+             <Route exact path="/" component={ LandingRevised } />
+             // <Route exact path="/" component={ Landing } />
              <Route exact path="/categories/:id" component={ categoriesShow } />
              <Route exact path="/about" component={ About } />
              <Route exact path="/users/new" component={usersNew} />
-             <Route exact path="/contact" component={ Contact } />
+             <Route exact path="/contact" component={ NewContact } />
+             // <Route exact path="/contact" component={ Contact } />
              <Route exact path="/experiences" component={ categoriesIndex } />
              <Route exact path="/activities/:id/edit" component={ EditActivityForm } />
              <Route exact path="/activities/:id" component={ activitiesShow } />
@@ -57,7 +63,9 @@ class App extends Component {
              <Route exact path="/stripe/:id/stripe_acct" component={ StripeAcct } />
              <Route exact path="/termsAndConditions" component={ ShowTermsAndConditions } />
              <Route exact path="/privacyAgreement" component={ PrivacyAgreement } />
+             <Route exact path="/aboutCreating" component={ AboutCreating } />
           </Switch>
+          <Footer />
          </div>
        </Router>
      </Provider>

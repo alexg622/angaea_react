@@ -1,24 +1,69 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from "../../actions/session/auth"
+import '../../styles/layout/header.scss'
 
-export default () => {
-  return (
-    <div class="new-footer-container">
-      <div class="new-footer-left-container">
-        <img class="angaea-footer-image" alt="" width="25px" height="25px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/the_angaea_final_symbol.png?raw=true"/>
-        <%= link_to "Angaea", root_path, class: "logo-footer" %>
-      </div>
-      <div id="new-footer-right-container">
-        <%= link_to "Services", root_path, class: "footer-color"%>
-        <% if current_user %>
-          <%= link_to "Dashboard", dashboard_path, class: "footer-color"%>
-        <% end %>
-        <%= link_to "About", "/about", class: "footer-color"%>
-        <%= link_to "Contact", "/contact", class: "footer-color"%>
-        <% if logged_in? %>
-          <%= link_to "Portfolio", user_path(current_user), class: "footer-color"%>
-        <%end%>
-      </div>
-    </div>
+class Header extends Component {
 
-  );
-};
+  loginLink() {
+    if(!this.props.auth.isAuthenticated) {
+      return (
+        <Link className="header-contact header-right" to="/login">Artist Portfolio</Link>
+      )
+    }
+  }
+
+  logoutLink() {
+    if(this.props.auth.isAuthenticated) {
+      return (
+        <div className="header-account header-right" onClick={() => this.props.logoutUser(this.props.currentUser.id)}>Logout</div>
+      )
+    }
+  }
+
+  showAccount() {
+    if(this.props.auth.isAuthenticated) {
+      return [
+        <Link key={"showAuthOne"} className="header-account header-right" to={`/users/${this.props.currentUser.id}`}>Account</Link>,
+        <Link key={"showAuthTwo"} className="header-account header-right" to={`/stripe/${this.props.currentUser.id}/stripe_acct`}>Payments</Link>
+      ]
+    }
+  }
+
+
+  render() {
+    return(
+      <div className="header-container">
+        <div className="left-header">
+          <img className="angaea-footer-image" alt="" width="25px" height="25px" src="https://github.com/alexg622/angaea_heroku/blob/master/app/assets/images/the_angaea_final_symbol.png?raw=true"/>
+          <Link className="header-title" to="/">Angaea</Link>
+        </div>
+        <div className="right-footer">
+          <Link className="header-services header-right" to="/experiences">Experiences</Link>
+          <Link className="header-about header-right" to="/about">About</Link>
+          <Link className="header-contact header-right" to="/contact">Contact</Link>
+          {this.loginLink()}
+          {this.logoutLink()}
+          {this.showAccount()}
+        </div>
+      </div>
+    )
+  }
+}
+
+Header.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+  currentUser: state.auth.currentUser || {},
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { logoutUser })(Header)

@@ -7,7 +7,7 @@
 }
 
 .display-it-none {
-  display: none; 
+  display: none;
 }
 
 .users-show-title {
@@ -155,6 +155,16 @@
     color: white !important;
     box-shadow: 5px 20px 30px rgba(0,0,0,0.2);
   }
+}
+
+.header-account:hover {
+  cursor: pointer;
+}
+
+.users-upcoming-activities-container {
+  display:flex;
+  justify-content: center;
+  font-size: 25px;
 }
 
 .create-service-toggle {

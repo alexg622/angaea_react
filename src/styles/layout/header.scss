@@ -25,10 +25,16 @@
 }
 
 .right-header {
-  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
   padding: 2%;
+  min-width: 375px;
+}
+
+.right-footer {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-right {

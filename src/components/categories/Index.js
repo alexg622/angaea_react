@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getCategories } from '../../actions/categories/categoryActions'
@@ -9,6 +10,7 @@ import CategoryCarousel from './categoryCarousel'
 class Index extends Component {
 
   componentDidMount() {
+    console.log(this.props);
     this.props.getCategories()
   }
 
@@ -28,7 +30,7 @@ class Index extends Component {
   render() {
     window.props = this.props
     return (
-      <div>
+      <div style={{minHeight: "100vh"}}>
         {this.showCategories()}
       </div>
 

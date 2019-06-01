@@ -41,7 +41,7 @@ class Login extends Component{
     window.props = this.props
     return (
       <div className="login-container-better">
-          <h1>Log Into My Portfolio</h1>
+          <h1>Log Into Artist Portfolio</h1>
           <form className="login-form" onSubmit={this.onSubmit}>
             <input className="login-inputs" autoComplete="email" type="email" name="email" onChange={this.onChange} placeholder="EMAIL" value={this.state.email}/>
             <input className="login-inputs" autoComplete="current-password" type="password" name="password" onChange={this.onChange} placeholder="PASSWORD" value={this.state.password}/>
@@ -51,10 +51,9 @@ class Login extends Component{
             </div>
             <div className="login-signup-container">
               <div className="login-signup-text">New to The Site?</div>
-              <Link className="best-btn no-underline" to='/users/new'>Create My Portfolio</Link>
+              <Link className="best-btn no-underline" to='/users/new'>Create Artist Portfolio</Link>
               <div className="login-signup-center"></div>
             </div>
-            <Link className="reset-password" to="/users/resetPasswordLink">Reset Password</Link>
         </form>
       </div>
     )

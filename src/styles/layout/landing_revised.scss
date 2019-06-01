@@ -1,0 +1,269 @@
+.lr-slider-top-container {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 400px;
+  min-height: 400px;
+  max-height: 400px;
+  display:flex;
+}
+
+.lr-first-slide-container {
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  min-height: 100%;
+  display:flex;
+  flex-direction: column;
+  background-color: #273e74;
+  color:white;
+  padding-bottom: 4%;
+  align-items: center;
+}
+
+.lr-second-slide-container {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display:flex;
+  flex-direction: column;
+  background-color: #2f6f4e;
+  color:white;
+  padding-bottom: 4%;
+  align-items: center;
+}
+
+.lr-third-slide-container {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display:flex;
+  flex-direction: column;
+  background-color: #c78b34;
+  color:white;
+  padding-bottom: 4%;
+  align-items: center;
+}
+
+.lr-first-upper-text {
+  padding-top: 2%;
+  font-size: 48px;
+}
+
+.lr-first-paragraph {
+  font-size: 25px;
+  padding-top: 6%;
+  text-align: center;
+  width: 40%;
+}
+
+.lr-first-experiences-link {
+  color: white;
+  background-color: black;
+  padding: 15px ;
+  border-radius: 5px;
+  margin-top: 4%;
+  text-decoration: none;
+}
+
+
+.lr-left-arrow {
+  position: absolute;
+  font-size: 30px;
+  color:white;
+  left: 5%;
+  top: 217.5px;
+  cursor: pointer;
+}
+
+.lr-right-arrow {
+  position: absolute;
+  font-size: 30px;
+  color:white;
+  left: 95%;
+  top: 217.5px;
+  cursor: pointer;
+}
+
+.lr-circles-container {
+  width: 20%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  left: 40%;
+  top: 420px;
+}
+
+.lr-circles-container div {
+  border: 1px solid white;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.circle-one {
+  background-color: lightgray;
+}
+
+.lr-second-upper-text {
+  padding-top: 2%;
+  font-size: 25px;
+}
+
+.lr-second-upper-paragraph {
+  font-size: 30px;
+  margin-top: 0.5%;
+}
+
+.lr-second-paragraph {
+  margin-top: 2%;
+  font-size: 21px;
+  width: 45%;
+  text-align: center;
+}
+
+.lr-how-it-works-container {
+  background-color: #d0b48f;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lr-how-it-works-title {
+  font-size: 40px;
+  color: black;
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.lr-how-it-works-text-outer-container {
+  display:flex;
+  margin-top: 5%;
+  justify-content: center;
+}
+
+.lr-how-it-works-text-container {
+  display:flex;
+  flex-direction: column;
+  margin-top: 2%;
+  width: 30%;
+  max-width: 30%;
+  min-width: 30%;
+  // margin-right: 2%;
+  // padding: 2%;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.lr-how-it-works-text {
+  margin-bottom: 5%;
+  width: 80%;
+}
+
+.lr-portfolio-explanation-container {
+  background-color: #ececec;
+  display:flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.lr-portfolio-left-container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.lr-portfolio-right-container {
+  width: 50%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lr-portfolio-left-paragraph {
+  width: 60%;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.lr-experience-economy-container {
+  width: 100%;
+  padding-top: 5%;
+  background-color: #d0b48f;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lr-header-text {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.lr-closing-image {
+  width: 175px;
+  min-width: 175px;
+  max-width: 175px;
+  height: 175px;
+  min-height: 175px;
+  max-height: 175px;
+  object-fit: contain;
+  background:white;
+  border-radius: 50%;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.lr-closing-image-second {
+  width: 175px;
+  min-width: 175px;
+  max-width: 175px;
+  height: 175px;
+  min-height: 175px;
+  max-height: 175px;
+  object-fit: contain;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.lr-closing-text-container {
+  display:flex;
+  justify-content: center;
+}
+
+.lr-final-container {
+  background-color: #ececec;
+  height: 200px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lr-left-text-container {
+  display:flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+
+.lr-right-text-container {
+  display:flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+
+.lr-closing-paragraph {
+  width: 80%;
+  text-align: center;
+  margin-bottom: 5%;
+}

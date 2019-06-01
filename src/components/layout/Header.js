@@ -10,7 +10,7 @@ class Header extends Component {
   loginLink() {
     if(!this.props.auth.isAuthenticated) {
       return (
-        <Link className="header-contact header-right" to="/login">My Portfolio</Link>
+        <Link className="header-contact header-right" to="/login">Artist Portfolio</Link>
       )
     }
   }
@@ -26,8 +26,8 @@ class Header extends Component {
   showAccount() {
     if(this.props.auth.isAuthenticated) {
       return [
-        <Link className="header-account header-right" to={`/users/${this.props.currentUser.id}`}>Account</Link>,
-        <Link className="header-account header-right" to={`/stripe/${this.props.currentUser.id}/stripe_acct`}>Payments</Link>
+        <Link key={"showAuthOne"} className="header-account header-right" to={`/users/${this.props.currentUser.id}`}>Account</Link>,
+        <Link key={"showAuthTwo"} className="header-account header-right" to={`/stripe/${this.props.currentUser.id}/stripe_acct`}>Payments</Link>
       ]
     }
   }

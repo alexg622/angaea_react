@@ -86,7 +86,7 @@ class New extends Component{
   render() {
     return (
       <div className="new-user-container">
-        <h1>Create My Portfolio</h1>
+        <h1>Create Artist Portfolio</h1>
         <form onSubmit={this.handleSubmit} encType="multipart/form-data" className="new-user-form" action="<%= users_path %>" method="post">
 
           <input className="second-new-user-name" type="text" name="user[name]" placeholder="FULL NAME*" onChange={this.handleChange("name")} value={this.state.name}/>
